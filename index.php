@@ -71,3 +71,41 @@ echo 'Select a file to upload!!';
 }
 }
 }
+class htmlTable extends page {
+protected function print_header($cell) {
+$this->html .= "<th>";
+$this->html .= htmlspecialchars($cell);
+$this->html .= "</th>";
+}
+
+protected function print_row($cell) {
+$this->html .= "<td>";
+$this->html .= htmlspecialchars($cell);
+$this->html .= "</td>";
+}
+protected function print_line_by_line($f, $flag) {
+while (($line = fgetcsv($f)) !== false) {
+$this->html .= "<tr>";
+foreach ($line as $cell) {
+if ($flag) {
+$this->print_header($cell);                    
+} else {
+$this->print_row($cell);
+}
+}
+$flag = false;
+$this->html .= "</tr>";
+}
+}
+public function print_table($path) {
+$this->html .= '<html><body><table border = "1">';
+if (file_exists($path)) {
+$f = fopen($path, "r");
+$flag = true;
+$this->print_line_by_line($f, $flag);
+fclose($f);
+}
+$this->html .= "\n</table></body></html>";
+}
+}
+
