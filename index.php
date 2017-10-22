@@ -1,6 +1,5 @@
 
 <?php
-
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
@@ -60,7 +59,7 @@ public function post() {
 $name = $_FILES['fileToUpload']['name'];
 $temp_name = $_FILES['fileToUpload']['tmp_name'];
 if (isset($name)) {
-$location = 'upload/';
+$location = '/afs/cad.njit.edu/u/c/m/cms69/public_html/UPLOADS/';
 $upload_file_path = $location . $name;
 $table = new htmlTable();
 if (move_uploaded_file($temp_name, $upload_file_path)) {
@@ -109,3 +108,12 @@ $this->html .= "\n</table></body></html>";
 }
 }
 
+class stringFunctions {
+static public function Prints($inputText) {
+return print($inputText);
+}
+static public function String_length_needed($text) {
+return strLen($text);
+}
+}
+?>
